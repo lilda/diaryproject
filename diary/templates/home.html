@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2>Diary</h2>
+    <br>
+    <h1>{{request.user}}님 안녕하세요<br></h1>
+    <a href="{% url 'create' %}"><button class="writing>">글쓰러 가기</button></a>
+    <a href="{% url 'login' %}"><button class="login>">로그인하기</button></a>
+    <a href="{% url 'join' %}"><button class="join>">회원가입하기</button></a>
+    <br>
+    <hr>
+    
+    {% for diary in diaries %}
+         <p class="title">제목 : {{diary.title}}</p>
+        {% if diary.image.url is not None %}
+         <p>사진:<img src="{{diary.image.url}}" alt="" width="200px"></p>
+         {% endif %}
+        <p class="content">내용 : {{diary.content}}</p>
+        작성자 : {{diary.user}}<br>
+        <a href="{% url 'detail' diary.id %}">자세히보기</a>
+        <a href="{% url 'update' diary.id %}">수정하기</a>
+        <br>
+        <br>
+        <br>
+    {% endfor %}
+</body>
+</html>

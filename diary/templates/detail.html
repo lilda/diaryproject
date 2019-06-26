@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>detail</title>
+    <style type="text/css">
+        .like{
+            color: BLUE;
+        }
+        
+        .unlike {
+            color: RED;
+            
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <h1>{{request.user}}님 안녕하세요<br></h1>
+    <a href="{% url 'home' %}">홈으로 가기</a><br>
+    <a href="{% url 'update' diary.id %}">수정하기</a><br>
+    <hr>
+    
+    제목 : {{diary.title}}
+    <br>
+    {% if diary.image.url is not None %}
+    <p>사진:<img src="{{diary.image.url}}" alt="" width="200px"></p>
+    {% endif %}
+    <br>
+    내용 : {{diary.content}}
+    <br>
+    글쓴이 : {{diary.user}}
+    <br>
+    {% if is_like %}
+    <a href="{% url 'like' diary.id %}"><button class="like>">LIKE</button></a>
+    {% else %}
+    <a href="{% url 'like' diary.id %}"><button class="unlike">UNLIKE</button></a>
+    {% endif %}
+</body>
+</html>
